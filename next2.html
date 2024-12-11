@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Page</title>
+  <style>
+    body {
+      font-family: 'Cursive', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #fbc2eb, #a18cd1);
+      animation: backgroundChange 15s infinite alternate;
+      color: white;
+      text-align: center;
+    }
+
+    @keyframes backgroundChange {
+      0% {
+        background: linear-gradient(to bottom right, #fbc2eb, #a18cd1);
+      }
+      50% {
+        background: linear-gradient(to bottom right, #ffdde1, #fc6076);
+      }
+      100% {
+        background: linear-gradient(to bottom right, #f64f59, #c471ed);
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #f64f59;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ff7e5f;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1> suno na motiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii😣😣😣😣😣</h1>
+  <div class="content">
+    <p> bahot dino se photo ni bheji apni bhej do naa 😢😢😢😢</p>
+  </div>
+  <button class="button" onclick="goBack()"> wapis re read kr lo na😢</button>
+
+  <script>
+    function goBack() {
+      window.history.back(); // Navigates back to the previous page
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Poem Display</title>
+  <style>
+    body {
+      font-family: 'Cursive', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      animation: backgroundChange 15s infinite alternate;
+    }
+
+    @keyframes backgroundChange {
+      0% {
+        background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      }
+      50% {
+        background: linear-gradient(to bottom right, #ffdde1, #fc6076);
+      }
+      100% {
+        background: linear-gradient(to bottom right, #fbc2eb, #a18cd1);
+      }
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      opacity: 0;
+      animation: bounceDrop 2s ease-in-out forwards;
+    }
+
+    @keyframes bounceDrop {
+      0% {
+        transform: translate(-50%, -100vh);
+        opacity: 0;
+      }
+      40% {
+        transform: translate(-50%, 50vh);
+        opacity: 1;
+      }
+      60% {
+        transform: translate(-50%, 30vh);
+      }
+      80% {
+        transform: translate(-50%, 40vh);
+      }
+      100% {
+        transform: translate(-50%, 30vh);
+      }
+    }
+
+    .poem-container {
+      display: block;
+      width: 80%;
+      max-height: 70vh;
+      overflow-y: scroll;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      margin-top: 20px;
+      color: black;
+      text-align: left;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      background: linear-gradient(135deg, #fbc2eb, #a18cd1, #fbc2eb);
+      animation: gradientTransition 8s infinite alternate;
+    }
+
+    @keyframes gradientTransition {
+      0% {
+        background: linear-gradient(135deg, #ffdde1, #fc6076);
+      }
+      50% {
+        background: linear-gradient(135deg, #fbc2eb, #a18cd1);
+      }
+      100% {
+        background: linear-gradient(135deg, #f64f59, #c471ed);
+      }
+    }
+
+    .poem-line {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .poem-line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button {
+      display: none;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #f64f59;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+    }
+
+    button.active {
+      display: inline-block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button:hover {
+      background-color: #ff7e5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="title" id="title" ondblclick="showPoem()">Meri moti   tap karo na ispe😁😁</div>
+  <div class="poem-container" id="poemContainer"></div>
+  <button id="button" onclick="navigate()">Yaha bhi tap karo na laado🤐🤐</button>
+
+  <script>
+    const title = document.getElementById('title');
+    const poemContainer = document.getElementById('poemContainer');
+    const button = document.getElementById('button');
+
+    const poemLines = [
+      "Under the golden touch of dawn,",
+      "Where whispers of morning have just begun,",
+      "I find your gaze, a gentle light,",
+      "Softly shining, calm and bright.",
+      "",
+      "Your laughter, a melody sweet and rare,",
+      "Fills the air, a song so fair,",
+      "The world fades in its frantic race,",
+      "When I see that smile on your face.",
+      "",
+      "The sun bends low, painting skies,",
+      "With hues that mirror your kind eyes.",
+      "Stars in their glory, a thousand high,",
+      "Can’t outshine the twinkle in your sigh.",
+      "",
+      "Your voice, a tender, lilting breeze,",
+      "Carrying tales of peace and ease.",
+      "Every word, a subtle dance,",
+      "A spark that draws me in a trance.",
+      "",
+      "How strange this heart, so bold and shy,",
+      "Beats louder when you walk by.",
+      "A fleeting moment, sweet and fine,",
+      "Where time itself will pause, align.",
+      "",
+      "Raindrops fall on window panes,",
+      "Rhythm echoing with gentle strains,",
+      "But none compare to the soft rain,",
+      "Of your words, that wash away my pain.",
+      "",
+      "Morning blooms in colors bright,",
+      "But none match your simple light.",
+      "The roses bend, the lilies bow,",
+      "To you, they say, 'You hold the now.'",
+      "",
+      "In gardens where the wild winds play,",
+      "Amid the fields of gold and clay,",
+      "I pause to watch, to wonder too,",
+      "What lucky fate has led me to you.",
+      "",
+      "The world, a canvas, bright and wide,",
+      "Paints shadows long and hearts collide,",
+      "But here, in this simple, quiet place,",
+      "We find our world, our time, our space.",
+      "",
+      "If I could, I’d keep this hour,",
+      "Wrapped in silence, made of flower,",
+      "Where nothing changes, nothing moves,",
+      "And everything in my heart approves.",
+      "",
+      "I hold this gift, your voice, your smile,",
+      "The quiet moments, soft and wild.",
+      "For in your warmth, I’ve come to see,",
+      "That here, in you, I’m truly free."
+    ];
+
+    function showPoem() {
+      title.style.display = 'none'; // Hide the title after animation
+      poemContainer.style.opacity = 1;
+
+      // Display each line with a delay and smooth transition
+      poemLines.forEach((line, index) => {
+        setTimeout(() => {
+          const lineElement = document.createElement('div');
+          lineElement.classList.add('poem-line');
+          lineElement.innerText = line;
+          poemContainer.appendChild(lineElement);
+          setTimeout(() => {
+            lineElement.classList.add('show');
+          }, 100);
+
+          // Show the button after the last line is displayed
+          if (index === poemLines.length - 1) {
+            setTimeout(() => {
+              button.classList.add('active');
+            }, 500); // Optional delay before showing the button
+          }
+        }, index * 1000); // Adjust delay for each line (1000ms for smoother effect)
+      });
+    }
+
+    function navigate() {
+      window.location.href = "next2.html"; // Replace with your actual next page path
+    }
+
+    // Initial title animation on page load
+    window.onload = () => {
+      setTimeout(() => {
+        title.style.opacity = 1;
+      }, 500); // Delay before the title drops
+    };
+  </script>
+</body>
+</html>

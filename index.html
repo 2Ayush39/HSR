@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clickable Links</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #ffdde1; /* Soft pink background */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #3e0a45; /* Dark purple text for romantic feel */
+    }
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8); /* Light white background with slight opacity */
+      padding: 30px 50px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e3a6c1; /* Light pink border */
+    }
+    h1 {
+      margin-bottom: 25px;
+      font-size: 2rem;
+      color: #c71585; /* Pink color for heading */
+      font-weight: bold;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      color: #fff;
+      background-color: #c71585; /* Pink button */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    button:hover {
+      background-color: #9b307e; /* Darker pink on hover */
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chalo Kuch Dikhata Hu</h1>
+    <button onclick="navigate()">Arre Yaha Click Karo Pehle😊😊😊</button>
+  </div>
+
+  <script>
+    function navigate() {
+      alert("Chale Moti??😒");
+      // Navigate to the 'next.html' page.
+      window.location.href = "next.html";
+    }
+  </script>
+</body>
+</html>
